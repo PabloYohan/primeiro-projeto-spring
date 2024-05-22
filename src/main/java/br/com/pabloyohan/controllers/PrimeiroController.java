@@ -8,6 +8,9 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -34,6 +37,13 @@ public class PrimeiroController {
   @GetMapping("/metodoQueryParams2")
   public String metodoComQueryParam2(@RequestParam Map<String, String> allParams) {
       return "O id do metodoComQueryParam é " + allParams.entrySet();
+  }
+
+  @PostMapping("/metodoPost")
+  public String metodoPost(@RequestBody Usuario usuario) {
+      return "O usuário é " + usuario.username();
+  }
+  record Usuario(String username) {
   }
   
   
