@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,6 +43,15 @@ public class PrimeiroController {
   @PostMapping("/metodoPost")
   public String metodoPost(@RequestBody Usuario usuario) {
       return "O usuário é " + usuario.username();
+  }
+
+  @GetMapping("/metodoResponseEntity/{id}")
+  public ResponseEntity<Object> metodoResponseEntity(@PathVariable Long id) {
+      var usuario = new Usuario("Pablo");
+      if(id > 5){
+        return ResponseEntity.ok().body(usuario);
+      }
+      return ResponseEntity.badRequest().body("Numero menor que 5");
   }
   record Usuario(String username) {
   }
